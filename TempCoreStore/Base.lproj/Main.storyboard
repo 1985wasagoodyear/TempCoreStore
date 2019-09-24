@@ -53,7 +53,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8T6-hM-4gu">
-                                <rect key="frame" x="40" y="371" width="40" height="17"/>
+                                <rect key="frame" x="40" y="371" width="334" height="17"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -71,6 +71,7 @@
                             <constraint firstItem="14g-iZ-iPK" firstAttribute="trailing" secondItem="o68-jy-yzp" secondAttribute="trailing" constant="40" id="QMZ-rx-u9s"/>
                             <constraint firstItem="o68-jy-yzp" firstAttribute="top" secondItem="8T6-hM-4gu" secondAttribute="bottom" constant="10" id="edn-1K-BlO"/>
                             <constraint firstItem="o68-jy-yzp" firstAttribute="leading" secondItem="14g-iZ-iPK" secondAttribute="leading" constant="40" id="hvv-Pa-FAE"/>
+                            <constraint firstItem="8T6-hM-4gu" firstAttribute="trailing" secondItem="o68-jy-yzp" secondAttribute="trailing" id="pmN-dA-CBz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="14g-iZ-iPK"/>
                     </view>

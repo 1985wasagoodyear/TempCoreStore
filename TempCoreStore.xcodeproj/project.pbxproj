@@ -18,6 +18,8 @@
 		3F329D95233A395F00BEF9AC /* HoomanModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F329D94233A395F00BEF9AC /* HoomanModelController.swift */; };
 		3F329D97233A398100BEF9AC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F329D96233A398100BEF9AC /* CoreDataManager.swift */; };
 		3F329D99233A3A9C00BEF9AC /* HoomanDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F329D98233A3A9C00BEF9AC /* HoomanDetailViewController.swift */; };
+		3FF211B5233A56AF000BF563 /* HoomanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF211B4233A56AF000BF563 /* HoomanController.swift */; };
+		3FF211B7233A597B000BF563 /* UIViewController+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF211B6233A597B000BF563 /* UIViewController+Utility.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		3F329D94233A395F00BEF9AC /* HoomanModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoomanModelController.swift; sourceTree = "<group>"; };
 		3F329D96233A398100BEF9AC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3F329D98233A3A9C00BEF9AC /* HoomanDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoomanDetailViewController.swift; sourceTree = "<group>"; };
+		3FF211B4233A56AF000BF563 /* HoomanController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoomanController.swift; sourceTree = "<group>"; };
+		3FF211B6233A597B000BF563 /* UIViewController+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Utility.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +98,7 @@
 			children = (
 				3F329D8F233A383300BEF9AC /* CoreDataItems */,
 				3F329D96233A398100BEF9AC /* CoreDataManager.swift */,
+				3FF211B4233A56AF000BF563 /* HoomanController.swift */,
 				3F329D94233A395F00BEF9AC /* HoomanModelController.swift */,
 			);
 			path = Model;
@@ -102,6 +107,7 @@
 		3F329D9B233A3AB700BEF9AC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				3FF211B6233A597B000BF563 /* UIViewController+Utility.swift */,
 				3F329D7B233A36BF00BEF9AC /* HoomanListViewController.swift */,
 				3F329D98233A3A9C00BEF9AC /* HoomanDetailViewController.swift */,
 			);
@@ -180,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F329D7C233A36BF00BEF9AC /* HoomanListViewController.swift in Sources */,
+				3FF211B5233A56AF000BF563 /* HoomanController.swift in Sources */,
 				3F329D78233A36BF00BEF9AC /* AppDelegate.swift in Sources */,
 				3F329D82233A36BF00BEF9AC /* TempCoreStore.xcdatamodeld in Sources */,
 				3F329D93233A38B900BEF9AC /* Hooman+CoreDataProperties.swift in Sources */,
@@ -187,6 +194,7 @@
 				3F329D97233A398100BEF9AC /* CoreDataManager.swift in Sources */,
 				3F329D99233A3A9C00BEF9AC /* HoomanDetailViewController.swift in Sources */,
 				3F329D95233A395F00BEF9AC /* HoomanModelController.swift in Sources */,
+				3FF211B7233A597B000BF563 /* UIViewController+Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

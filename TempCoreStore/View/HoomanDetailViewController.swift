@@ -10,27 +10,27 @@ import UIKit
 
 class HoomanDetailViewController: UIViewController {
     
+    // MARK: - Storyboard Outlets
+    
     @IBOutlet var nameStaticLabel: UILabel!
     @IBOutlet var nameEntryTextField: UITextField!
     @IBOutlet var saveBarButtonItem: UIBarButtonItem!
     
+    // MARK: - Properties
+    
     var controller: HoomanController!
     
+    // MARK: - Custom Action Methods
+    
     @IBAction func saveBarButtonAction(_ sender: UIBarButtonItem) {
-        if let name = nameEntryTextField.text, name.isEmpty == false {
+        if let name = nameEntryTextField.text,
+            name.isEmpty == false {
             controller.addHooman(name)
-            showAlertAndDismiss(text: "Created Hooman \"\(name)\"")
+            showAlert(text: "Created Hooman \"\(name)\"") {
+                self.navigationController?.popViewController(animated: true)
+            }
         }
     }
     
-    func showAlertAndDismiss(text: String) {
-        let alert = UIAlertController(title: text, message: nil, preferredStyle: .alert)
-        let ok = UIAlertAction(title: "OK", style: .default) { _ in
-            self.navigationController?.popViewController(animated: true)
-        }
-        alert.addAction(ok)
-        present(alert, animated: true, completion: nil)
-    }
-
  }
     

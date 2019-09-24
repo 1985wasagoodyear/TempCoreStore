@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension Hooman {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Hooman> {

@@ -12,6 +12,8 @@ private let CELL_ID = "HoomanCellIdentifier"
 
 class HoomanListViewController: UIViewController {
 
+    // MARK: - Storyboard Outlets
+    
     @IBOutlet var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
@@ -20,26 +22,30 @@ class HoomanListViewController: UIViewController {
         }
     }
     
+    // MARK: - Properties
+    
     lazy var controller: HoomanController = {
         return HoomanModelController()
     }()
+    
+    // MARK: - Lifecycle Methods
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
+    // MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "makeHooman", let dest = segue.destination as? HoomanDetailViewController {
             dest.controller = controller
         }
     }
-    
-    private func fatalErrorWrongIndexPath() -> Never {
-        fatalError("Invalid access: wrong IndexPath")
-    }
 
 }
+
+// MARK: - UITableView Data Source
 
 extension HoomanListViewController: UITableViewDataSource {
     
@@ -61,7 +67,8 @@ extension HoomanListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section = indexPath.section
         let row = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ID,
+                                                 for: indexPath)
         let name: String?
         
         switch section {
@@ -79,6 +86,7 @@ extension HoomanListViewController: UITableViewDataSource {
     
 }
 
+// MARK: - UITableView Delegate
 
 extension HoomanListViewController: UITableViewDelegate {
 
@@ -95,14 +103,16 @@ extension HoomanListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let header: String
         switch section {
         case 0:
-            return "Temporary Hoomans"
+            header = "Temporary Hoomans"
         case 1:
-            return "Saved Hoomans"
+            header = "Saved Hoomans"
         default:
             fatalErrorWrongIndexPath()
         }
+        return header
     }
     
 }

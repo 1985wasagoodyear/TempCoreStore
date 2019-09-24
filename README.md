@@ -17,3 +17,17 @@
 1. Short term items are made in a temporary context without a store
 2. Long term items are always made into a usual context with a store
 
+### Application Structure
+
+##### (is there a better way to present this?...)
+                                                                
+                            [HoomanModelController] -(adopts)-> [HoomanController]
+                                        |
+                                      (has)
+                                        |
+                                        v
+[AppDelegate] -(displays)-> [HoomanListViewController] -(shows)-> [HoomanDetailViewController]
+
+
+
+[HoomanListViewController] -(shares controller with)-> HoomanDetailViewController
