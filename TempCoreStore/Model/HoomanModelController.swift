@@ -31,10 +31,9 @@ class HoomanModelController: HoomanController {
     func saveHooman(_ hooman: Hooman) {
         if tempHoomans.contains(hooman) {
             tempHoomans.removeAll(where: { $0 === hooman })
-            savedHoomans.append(hooman)
-            coreData.saveEntity(hooman)
+            let savedEntity = coreData.saveEntity(hooman)
+            savedHoomans.append(savedEntity! as! Hooman)
         }
-        
     }
     
     /// deletes a persisted hooman
@@ -43,7 +42,8 @@ class HoomanModelController: HoomanController {
     func deleteHooman(_ hooman: Hooman) {
         if savedHoomans.contains(hooman) {
             savedHoomans.removeAll(where: { $0 === hooman })
-            coreData.deleteEntity(hooman)
+            let tempEntity = coreData.deleteEntity(hooman)
+            tempHoomans.append(tempEntity! as! Hooman)
         }
     }
     

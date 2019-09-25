@@ -25,7 +25,7 @@ import CoreData
  
  */
 final class CoreDataManager {
-        
+    
     // MARK: - Core Data stack
     
     /// temporary context, items are made temporary here
@@ -42,7 +42,7 @@ final class CoreDataManager {
         context.persistentStoreCoordinator = self.persistentContainer.persistentStoreCoordinator
         return context
     }()
-
+    
     /// persistent container object, >iOS 10
     lazy private var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "TempCoreStore")
@@ -53,18 +53,26 @@ final class CoreDataManager {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
-    /// save context, back to disk
+    
+    /// save context, back to disk and cleans up tempContext's changes
     private func saveContext () {
-        let context = mainContext
-        if context.hasChanges {
+        if mainContext.hasChanges {
             do {
-                try context.save()
+                try mainContext.save()
             } catch {
                 let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                fatalError("Unresolved error saving mainContext:\n\(nserror), \(nserror.userInfo)")
+            }
+        }
+        if tempContext.hasChanges {
+            do {
+                try tempContext.save()
+            }
+            catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error saving tempContext:\n\(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -80,7 +88,6 @@ final class CoreDataManager {
             print(error)
             results = []
         }
-
         return results
     }
     
@@ -97,30 +104,44 @@ final class CoreDataManager {
     }
     
     /// call this to pivot an item from the tempContext to the mainContext
-    func saveEntity(_ entity: NSManagedObject) {
-        if entity.managedObjectContext === tempContext {
-            mainContext.insert(entity)
+    /// Return: item in context of mainContext
+    func saveEntity(_ entity: NSManagedObject) -> NSManagedObject? {
+        if entity.managedObjectContext == nil || entity.managedObjectContext === tempContext {
+            let newEntity = makeEntity(with: entity.entity.name!,
+                                       info: entity.attributeDictionary,
+                                       context: mainContext)
             tempContext.delete(entity)
             saveContext()
+            return newEntity
         }
+        return nil
     }
     
     /// call this to delete an item currently in the mainContext
-    func deleteEntity(_ entity: NSManagedObject) {
+    /// Return: item in context of tempContext
+    func deleteEntity(_ entity: NSManagedObject) -> NSManagedObject? {
         if entity.managedObjectContext === mainContext {
+            let newEntity = makeEntity(with: entity.entity.name!,
+                                       info: entity.attributeDictionary,
+                                       context: tempContext)
+            
             mainContext.delete(entity)
             saveContext()
+            return newEntity
         }
+        return nil
     }
     
     /// call this to create an entity of entityName and populate its contents with a dictionary of items
     @discardableResult
-    func makeEntity(with entityName: String, info: [String:Any]) -> NSManagedObject? {
+    func makeEntity(with entityName: String,
+                    info: [String:Any],
+                    context: NSManagedObjectContext? = nil) -> NSManagedObject? {
         guard let desc = NSEntityDescription.entity(forEntityName: entityName,
-                                                    in: tempContext) else {
-            return nil
+                                                    in: mainContext) else {
+                                                        return nil
         }
-        let object = NSManagedObject(entity: desc, insertInto: nil)
+        let object = NSManagedObject(entity: desc, insertInto: context)
         for key in info.keys {
             object.setValue(info[key], forKey: key)
         }
@@ -129,4 +150,13 @@ final class CoreDataManager {
     
 }
 
+extension NSManagedObject {
+    var attributeDictionary: [String: Any] {
+        var info: [String: Any] = [:]
+        for attribute in self.entity.attributesByName {
+            info[attribute.key] = self.value(forKey: attribute.key)
+        }
+        return info
+    }
+}
 
