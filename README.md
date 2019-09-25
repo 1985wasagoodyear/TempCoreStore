@@ -20,7 +20,7 @@
 ### Application Structure
 
 ##### (is there a better way to present this?...)
-                                                                
+```                                                                
                             [HoomanModelController] -(adopts)-> [HoomanController]
                                         |
                                       (has)
@@ -31,3 +31,4 @@
 
 
 [HoomanListViewController] -(shares controller with)-> HoomanDetailViewController
+```
